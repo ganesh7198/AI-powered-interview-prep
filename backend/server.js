@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { connectDB } from './config/db.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -22,5 +23,6 @@ app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+	connectDB();
 	console.log(`App listening at http://localhost:${PORT}`);
 });
