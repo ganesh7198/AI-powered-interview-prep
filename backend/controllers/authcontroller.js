@@ -20,7 +20,6 @@ const generateTokenAndSetCookie = (userId, res) => {
   return token;
 };
 
-
 export const signupController = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -32,20 +31,36 @@ export const signupController = async (req, res) => {
     }
 
     const existingUser = await User.findOne({ email });
-
     if (existingUser) {
       return res.status(409).json({
         message: "Email already exists"
       });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+
+    let profileImg = "";
+
+    if (req.file) {
+      const uploadResult = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          { folder: "profiles" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        ).end(req.file.buffer);
+      });
+
+      profileImg = uploadResult.secure_url;
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
+      profileImg 
     });
 
     generateTokenAndSetCookie(user._id, res);
@@ -55,14 +70,14 @@ export const signupController = async (req, res) => {
       user: {
         _id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        profileImg: user.profileImg
       }
     });
 
   } catch (error) {
     console.log("Error in signup controller:", error.message);
 
-    // handle duplicate email edge-case (race condition)
     if (error.code === 11000) {
       return res.status(409).json({
         message: "Email already exists"
