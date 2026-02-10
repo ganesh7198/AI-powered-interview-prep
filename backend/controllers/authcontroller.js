@@ -139,7 +139,7 @@ export const getUserProfile= async (req,res)=>{
     const userid=req.user._id;
 	const userProfile=await User.findById(userid).select("-password");
 	if(!userProfile){
-		return res.status(404).json({message:"user not found "});
+		return res.status(404).json({message:"unauthorized user "});
 	}
 	res.status(200).json({data:userProfile})
    }catch(error){
