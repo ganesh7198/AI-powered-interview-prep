@@ -4,9 +4,11 @@ import {
   conceptExplainPrompt,
 } from "../utils/prompts.js";
 
+
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
+
 
 export const generateinterviewquestion = async (req, res) => {
   try {
@@ -43,8 +45,8 @@ export const generateinterviewquestion = async (req, res) => {
     });
   } catch (error) {
     console.log(
-      "error in the generateinterviewquestion controller",
-      error.message
+      "error in generateinterviewquestion controller",
+      error
     );
     res.status(500).json({ message: "Internal server error" });
   }
@@ -66,16 +68,14 @@ export const generateconceptexplanation = async (req, res) => {
       contents: prompt,
     });
 
-    const explanation = response.text;
-
     res.status(200).json({
       success: true,
-      explanation: explanation.trim(),
+      explanation: response.text.trim(),
     });
   } catch (error) {
     console.log(
-      "error in the generate concept explanation controller",
-      error.message
+      "error in generateconceptexplanation controller",
+      error
     );
     res.status(500).json({ message: "Internal server error" });
   }
