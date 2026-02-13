@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-
+import dotenv, { configDotenv } from "dotenv";
+configDotenv;
 import express from "express";
 import cors from "cors";
 import path from "path";
@@ -11,17 +11,15 @@ import { connectDB } from "./config/db.js";
 import authroute from "./routes/auth.route.js";
 import sessionroute from "./routes/session.route.js";
 import questionroute from "./routes/question.route.js";
-
 import protect from "./middleware/authmiddleware.js";
-import { generateconceptexplanation, generateinterviewquestion } from "./controllers/aicontroller.js";
+import { generateinterviewquestion } from "./controllers/aicontroller.js";
+import { generateconceptexplanation } from "./controllers/aicontroller.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // 👇 THIS IS THE FIX
-dotenv.config({
-  path: path.resolve(__dirname, "../.env"),
-});
+
 
 
 
