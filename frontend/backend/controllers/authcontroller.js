@@ -14,7 +14,7 @@ const generateTokenAndSetCookie = (userId, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     maxAge: 24 * 60 * 60 * 1000
   });
 
@@ -104,7 +104,7 @@ export const loginController = async (req, res) => {
       .select("+password"); // 🔥 IMPORTANT
 
     if (!existingUser) {
-      return res.status(404).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, existingUser.password);
