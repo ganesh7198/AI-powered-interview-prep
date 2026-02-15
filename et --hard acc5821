@@ -1,0 +1,24 @@
+[33m731a1e7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33mb8a1cb2[m HEAD@{1}: reset: moving to HEAD~1
+[33m72646fe[m HEAD@{2}: reset: moving to HEAD~1
+[33m744fcb9[m HEAD@{3}: reset: moving to HEAD~1
+[33m359f3dc[m HEAD@{4}: reset: moving to HEAD~1
+[33m0d067f3[m HEAD@{5}: reset: moving to HEAD~1
+[33macc5821[m HEAD@{6}: commit: .
+[33m0d067f3[m HEAD@{7}: reset: moving to HEAD~1
+[33m42e3ab3[m HEAD@{8}: reset: moving to HEAD~1
+[33m57e37a6[m HEAD@{9}: commit: now main part will start
+[33m42e3ab3[m HEAD@{10}: commit: backend resolve
+[33m0d067f3[m HEAD@{11}: commit: resolve it
+[33m359f3dc[m HEAD@{12}: commit: backend done need to resolve frontend problem
+[33m744fcb9[m HEAD@{13}: commit: ai controller done
+[33m72646fe[m HEAD@{14}: commit: question controller done
+[33mb8a1cb2[m HEAD@{15}: commit: session controller done
+[33m731a1e7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{16}: commit: upload img resolve
+[33m485c2bd[m HEAD@{17}: commit: auth done
+[33med9db34[m HEAD@{18}: commit: .
+[33m2f9b423[m HEAD@{19}: commit: backend start
+[33md0d5994[m HEAD@{20}: commit: backend start
+[33meb830ab[m HEAD@{21}: commit: backend setup complete
+[33m964af1a[m HEAD@{22}: Branch: renamed refs/heads/master to refs/heads/main
+[33m964af1a[m HEAD@{24}: commit (initial): first commit
