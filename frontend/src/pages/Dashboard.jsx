@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FiPlus } from "react-icons/fi";
 
 function DashBoard() {
   const [session, setsession] = useState([]);
@@ -82,6 +83,9 @@ function DashBoard() {
           </p>
         </div>
       ))}
+      <button className="text-white fixed bottom-34 right-44 h-14 w-14 bg-amber-500 rounded-2xl shadow-lg hover:bg-amber-600 transition duration-300 flex items-center justify-center">
+        <FiPlus size={28} />
+      </button>
     </>
   );
 }
