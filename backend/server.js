@@ -14,7 +14,7 @@ import authroute from "./routes/auth.route.js";
 import sessionroute from "./routes/session.route.js";
 import questionroute from "./routes/question.route.js";
 import protect from "./middleware/authmiddleware.js";
-import { generateinterviewquestion } from "./controllers/aicontroller.js";
+import { generateInterviewQuestion } from "./controllers/aicontroller.js";
 import { generateconceptexplanation } from "./controllers/aicontroller.js";
 
 const app = express();
@@ -50,7 +50,7 @@ app.use("/api/v1/question", questionroute);
 app.post(
   "/api/ai/generate-question",
   protect,
-  generateinterviewquestion
+  generateInterviewQuestion
 );
 
 app.post(

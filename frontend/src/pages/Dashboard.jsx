@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiPlus } from "react-icons/fi";
+import CreateSessionModal from "../components/CreateSessionModal";
 
 function DashBoard() {
   const [session, setsession] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [box,setbox]=useState(false);
 
   const fetchProfile = async () => {
     try {
@@ -32,13 +34,9 @@ function DashBoard() {
 
   if (loading)
     return (
-      <p>
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-      </p>
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="h-14 w-14 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+      </div>
     );
 
   return (
@@ -83,9 +81,10 @@ function DashBoard() {
           </p>
         </div>
       ))}
-      <button className="text-white fixed bottom-34 right-44 h-14 w-14 bg-amber-500 rounded-2xl shadow-lg hover:bg-amber-600 transition duration-300 flex items-center justify-center">
+      <button onClick={()=>setbox(true)}  className="text-white fixed bottom-34 right-44 h-14 w-14 bg-amber-500 rounded-2xl shadow-lg hover:bg-amber-600 transition duration-300 flex items-center justify-center">
         <FiPlus size={28} />
       </button>
+       {box==true && <CreateSessionModal setbox={setbox}></CreateSessionModal>}
     </>
   );
 }
