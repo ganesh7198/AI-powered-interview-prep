@@ -18,7 +18,7 @@ function DashBoard() {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/v1/session/my-session",
+        "https://ai-powered-interview-prep-8a9m.onrender.com/api/v1/session/my-session",
         { withCredentials: true }
       );
 
@@ -38,7 +38,7 @@ function DashBoard() {
     setDeleteId(sessionId);
 
     try {
-      await axios.delete(`http://localhost:8000/api/v1/session/${sessionId}`, {
+      await axios.delete(`https://ai-powered-interview-prep-8a9m.onrender.com/api/v1/session/${sessionId}`, {
         withCredentials: true,
       });
 

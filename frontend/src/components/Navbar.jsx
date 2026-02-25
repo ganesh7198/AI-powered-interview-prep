@@ -13,9 +13,12 @@ const Navbar = () => {
   // Fetch profile
   const fetchProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/auth/profile", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://ai-powered-interview-prep-8a9m.onrender.com/api/v1/auth/profile",
+        {
+          withCredentials: true,
+        }
+      );
 
       if (res.data) {
         setUser(res.data.data || res.data);
@@ -45,7 +48,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/api/v1/auth/logout",
+        "https://ai-powered-interview-prep-8a9m.onrender.com/api/v1/auth/logout",
         {},
         { withCredentials: true }
       );

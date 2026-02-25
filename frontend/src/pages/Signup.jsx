@@ -50,7 +50,7 @@ const Signup = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:8000/api/v1/auth/signup",
+        "https://ai-powered-interview-prep-8a9m.onrender.com/api/v1/auth/signup",
         data,
         { withCredentials: true }
       );
