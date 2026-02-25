@@ -12,7 +12,7 @@ import {
   FiMessageSquare,
 } from "react-icons/fi";
 import { RiPushpinFill, RiPushpinLine } from "react-icons/ri";
-import BASE_URL, { API_PATH } from "../utils/apiPath";
+import BASE_URL ,{API_PATH}from "../utils/Apipath"
 
 function Interviewprep() {
   const { sessionId } = useParams();
