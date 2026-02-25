@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { FiPlus, FiTrash2, FiBriefcase, FiClock, FiTag } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +9,13 @@ function DashBoard() {
   const [loading, setLoading] = useState(true);
   const [box, setbox] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0); // Add refresh key
 
   const navigate = useNavigate();
 
   // ================= FETCH SESSIONS =================
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         "http://localhost:8000/api/v1/session/my-session",
@@ -28,7 +30,7 @@ function DashBoard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // ================= DELETE SESSION =================
   const deleteSession = async (e, sessionId) => {
@@ -51,9 +53,22 @@ function DashBoard() {
     }
   };
 
+  // ================= REFRESH SESSIONS =================
+  const refreshSessions = useCallback(() => {
+    fetchProfile();
+  }, [fetchProfile]);
+
+  // ================= HANDLE MODAL CLOSE WITH REFRESH =================
+  const handleModalClose = (shouldRefresh = false) => {
+    setbox(false);
+    if (shouldRefresh) {
+      refreshSessions();
+    }
+  };
+
   useEffect(() => {
     fetchProfile();
-  }, []);
+  }, [fetchProfile, refreshKey]); // Add refreshKey to dependencies
 
   // ================= LOADING =================
   if (loading) {
@@ -95,7 +110,12 @@ function DashBoard() {
           </button>
         </div>
 
-        {box && <CreateSessionModal setbox={setbox} />}
+        {box && (
+          <CreateSessionModal
+            setbox={handleModalClose}
+            onSessionCreated={refreshSessions}
+          />
+        )}
       </div>
     );
   }
@@ -213,7 +233,12 @@ function DashBoard() {
         <FiPlus size={28} />
       </button>
 
-      {box && <CreateSessionModal setbox={setbox} />}
+      {box && (
+        <CreateSessionModal
+          setbox={handleModalClose}
+          onSessionCreated={refreshSessions}
+        />
+      )}
     </div>
   );
 }

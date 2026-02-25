@@ -3,33 +3,65 @@ import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 
-function CreateSessionModal({ setbox }) {
+function CreateSessionModal({ setbox, onSessionCreated }) {
+  // Add onSessionCreated prop
   const [formData, setFormData] = useState({
     role: "",
     experience: "",
     topicsToFocus: "",
     description: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError("");
   };
 
   const handleSubmit = async () => {
-    try{
-       const res = await axios.post(
-         "http://localhost:8000/api/ai/generate-question",
-         formData,
-		 {withCredentials:true}
-       );
-	   console.log(res.data)
-	}catch(error){
-     console.log(error)
-	}
-    setbox(false);
+    // Validate form
+    if (
+      !formData.role ||
+      !formData.experience ||
+      !formData.topicsToFocus ||
+      !formData.description
+    ) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/ai/generate-question",
+        formData,
+        { withCredentials: true }
+      );
+
+      console.log(res.data);
+
+      // Call the refresh callback before closing
+      if (onSessionCreated) {
+        onSessionCreated();
+      }
+
+      // Close modal
+      setbox(false);
+    } catch (error) {
+      console.log(error);
+      setError(
+        error.response?.data?.message ||
+          "Failed to generate questions. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,7 +69,8 @@ function CreateSessionModal({ setbox }) {
       <div className="bg-white w-96 p-6 rounded-2xl shadow-xl relative">
         <button
           onClick={() => setbox(false)}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          disabled={loading}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <FaTimes size={18} />
         </button>
@@ -49,6 +82,13 @@ function CreateSessionModal({ setbox }) {
           Fill details to get personalized questions
         </p>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
+            {error}
+          </div>
+        )}
+
         <div className="mb-3">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Role
@@ -59,7 +99,8 @@ function CreateSessionModal({ setbox }) {
             placeholder="e.g. Frontend Developer"
             value={formData.role}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400"
+            disabled={loading}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -73,7 +114,8 @@ function CreateSessionModal({ setbox }) {
             placeholder="e.g. 3 years"
             value={formData.experience}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400"
+            disabled={loading}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -87,7 +129,8 @@ function CreateSessionModal({ setbox }) {
             placeholder="e.g. React, JavaScript, CSS"
             value={formData.topicsToFocus}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400"
+            disabled={loading}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -101,17 +144,43 @@ function CreateSessionModal({ setbox }) {
             value={formData.description}
             onChange={handleChange}
             rows="3"
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400 resize-none"
+            disabled={loading}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-400 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
           ></textarea>
         </div>
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-black text-white py-3 rounded-xl hover:bg-amber-600 transition flex items-center justify-center gap-2 font-medium"
+          disabled={loading}
+          className="w-full bg-black text-white py-3 rounded-xl hover:bg-amber-600 transition flex items-center justify-center gap-2 font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
-          <IoMdAdd size={20} />
-          Create Session
+          {loading ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Generating Questions...</span>
+            </>
+          ) : (
+            <>
+              <IoMdAdd size={20} />
+              <span>Create Session</span>
+            </>
+          )}
         </button>
+
+        {/* Loading Overlay */}
+        {loading && (
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 border-4 border-amber-200 border-t-amber-500 rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-gray-600 font-medium">
+                Creating your interview session...
+              </p>
+              <p className="text-sm text-gray-400 mt-2">
+                This may take a few moments
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
