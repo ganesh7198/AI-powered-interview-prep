@@ -1,4 +1,4 @@
- const BASE_URL = "https://ai-powered-interview-prep-8a9m.onrender.com ";
+ const BASE_URL = "https://ai-powered-interview-prep-8a9m.onrender.com";
 
 export const API_PATH = {
   AUTH: {
