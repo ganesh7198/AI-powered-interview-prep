@@ -84,7 +84,7 @@ function Interviewprep() {
   // ================= TOGGLE PIN =================
   const toggleQuestionPinStates = async (questionId) => {
     try {
-      await axios.patch(
+      await axios.post(
         `${BASE_URL}${API_PATH.QUESTION.TOGGLE_PIN(questionId)}`,
         {},
         { withCredentials: true }
