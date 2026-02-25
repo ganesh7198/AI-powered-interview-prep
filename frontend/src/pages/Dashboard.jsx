@@ -73,7 +73,7 @@ function DashBoard() {
   // ================= LOADING =================
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100">
         <div className="relative">
           <div className="h-16 w-16 border-4 border-amber-200 border-t-amber-500 rounded-full animate-spin"></div>
           <p className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-sm">
@@ -87,7 +87,7 @@ function DashBoard() {
   // ================= EMPTY STATE =================
   if (session.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
         <div className="bg-white/80 backdrop-blur-sm shadow-xl rounded-3xl p-12 text-center max-w-lg w-full border border-gray-100">
           <div className="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <FiBriefcase className="text-amber-500" size={40} />
@@ -104,7 +104,7 @@ function DashBoard() {
 
           <button
             onClick={() => setbox(true)}
-            className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transform hover:-translate-y-1"
+            className="px-8 py-4 bg-linear-to-r from-amber-500 to-orange-500 text-white rounded-2xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-medium shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transform hover:-translate-y-1"
           >
             Create First Session
           </button>
@@ -122,7 +122,7 @@ function DashBoard() {
 
   // ================= NORMAL DASHBOARD =================
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -138,7 +138,7 @@ function DashBoard() {
             </div>
             <button
               onClick={() => setbox(true)}
-              className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-5 py-2.5 rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 bg-linear-to-r from-amber-500 to-orange-500 text-white px-5 py-2.5 rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-md hover:shadow-lg"
             >
               <FiPlus size={20} />
               <span>New Session</span>
@@ -158,8 +158,8 @@ function DashBoard() {
                 deleteId === item._id ? "opacity-50 scale-95" : ""
               }`}
             >
-              {/* Top gradient bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              {/* Top linear bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
 
               {/* DELETE BUTTON */}
               <button
@@ -228,7 +228,7 @@ function DashBoard() {
       {/* Floating Add Button (mobile friendly) */}
       <button
         onClick={() => setbox(true)}
-        className="lg:hidden fixed bottom-6 right-6 h-14 w-14 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110"
+        className="lg:hidden fixed bottom-6 right-6 h-14 w-14 bg-linear-to-r from-amber-500 to-orange-500 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110"
       >
         <FiPlus size={28} />
       </button>

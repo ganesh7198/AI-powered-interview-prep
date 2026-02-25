@@ -124,7 +124,7 @@ function Interviewprep() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center">
         <div className="relative">
           <div className="h-16 w-16 border-4 border-amber-200 border-t-amber-500 rounded-full animate-spin"></div>
           <p className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-sm">
@@ -137,7 +137,7 @@ function Interviewprep() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <FiMessageSquare className="text-red-500" size={24} />
@@ -159,7 +159,7 @@ function Interviewprep() {
 
   if (!sessiondata) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6">
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md">
           <h2 className="text-xl font-bold text-gray-800 mb-2">
             Session Not Found
@@ -173,7 +173,7 @@ function Interviewprep() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-6 py-6">
@@ -256,7 +256,7 @@ function Interviewprep() {
                     <button
                       onClick={() => generateConceptExplananation(q._id)}
                       disabled={selectedQuestionId === q._id}
-                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                      className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-amber-500 to-orange-500 text-white rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
                     >
                       {selectedQuestionId === q._id ? (
                         <>
@@ -291,7 +291,7 @@ function Interviewprep() {
               {q.answer && expandedQuestions[q._id] && (
                 <div className="px-6 pb-6">
                   <div className="border-t border-gray-100 pt-4">
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 border border-gray-100">
+                    <div className="bg-linear-to-br from-gray-50 to-white rounded-xl p-5 border border-gray-100">
                       <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-line leading-relaxed">
                         {q.answer}
                       </div>
@@ -304,7 +304,7 @@ function Interviewprep() {
               {selectedQuestionId === q._id && !q.answer && (
                 <div className="px-6 pb-6">
                   <div className="border-t border-gray-100 pt-4">
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 border border-gray-100">
+                    <div className="bg-linear-to-br from-gray-50 to-white rounded-xl p-5 border border-gray-100">
                       <div className="flex items-center gap-3 text-gray-500">
                         <FiLoader className="animate-spin" size={18} />
                         <span>Generating explanation...</span>
